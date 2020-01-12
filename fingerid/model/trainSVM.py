@@ -4,11 +4,10 @@ Train the model using SVM on all the training data.
 ===================================================
 """
 import sys
-import commands
 import pickle
 import numpy
 import multiprocessing
-
+import os
 from svmutil import *
 
 def trainModels(kernel, labels, model_dir, select_c=False, n_p=4, prob=False):
@@ -35,8 +34,13 @@ def trainModels(kernel, labels, model_dir, select_c=False, n_p=4, prob=False):
     The trained models will be stored in the folder MODELS
 
     """
-    commands.getoutput("mkdir %s" % model_dir)
-    print "Create directory %s to store the trained models" % model_dir
+    #commands.getoutput("mkdir %s" % model_dir)
+
+    if not os.path.exists(model_dir):
+        os.mkdir(model_dir)
+
+
+    print("Create directory %s to store the trained models" % model_dir)
     (n_x, n_x) = kernel.shape
     (n_x, n_y) = labels.shape
     x = kernel
@@ -48,8 +52,8 @@ def trainModels(kernel, labels, model_dir, select_c=False, n_p=4, prob=False):
     #cv_accs = numpy.zeros(n_y) # cross validation accuracy
     #result_queue = multiprocessing.Queue(n_y)
     if n_y < n_p:
-        print "Only %d fingerprints are used" % n_y
-        print "Change n_p to %d" % n_y
+        print("Only %d fingerprints are used" % n_y)
+        print("Change n_p to %d" % n_y)
         n_p = n_y
     task_dict = {}
     for i in range(n_y):

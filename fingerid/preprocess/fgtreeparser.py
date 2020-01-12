@@ -8,12 +8,11 @@ Parse fragmenation tree (.dot file) to FragTree object defined in fgtree.py.
 """
 import re
 import sys
-import commands
 import os
 import numpy
 
-from fgtree import FragTree
-from util import sortbyfilenames
+from fingerid.preprocess.fgtree import FragTree
+from fingerid.preprocess.util import sortbyfilenames
 
 class FragTreeParser:
     
@@ -28,7 +27,8 @@ class FragTreeParser:
         if dir_path[-1] != "/":
             dir_path = dir_path + "/"
         # invoke parse file for every file in the dir_path directory           
-        files = commands.getoutput("ls %s" % dir_path).split()
+        #files = commands.getoutput("ls %s" % dir_path).split()
+        files = os.listdir(dir_path)
         count = 0
         for f in files:
             tree = self.parse_file(dir_path + f)

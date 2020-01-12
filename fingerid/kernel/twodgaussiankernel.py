@@ -4,7 +4,7 @@ Compute probability product kernel for MS/MS.
 =============================================
 """
 
-from mskernel import Kernel
+from fingerid.kernel.mskernel import Kernel
 import numpy
 
 class TwoDGaussianKernel(Kernel):
@@ -146,7 +146,7 @@ class TwoDGaussianKernel(Kernel):
 
     def _peaks_to_matrix(self, spec):
         """ convert list of peaks into ndarray form """
-        diff =  spec.precursor - spec.mass # align the peaks. remove the addcut
+        diff = spec.precursor - spec.mass # align the peaks. remove the addcut
         n = len(spec.peaks)
         matrix = numpy.zeros((n,2))
         count = 0
@@ -169,8 +169,10 @@ class TwoDGaussianKernel(Kernel):
 
 
     def _gaussprodmixture(self, i_peaks, j_peaks, sm, si):
-        X1 = i_peaks; X2 = j_peaks;
-        N1 = numpy.size(X1,0); N2 = numpy.size(X2,0)
+        X1 = i_peaks
+        X2 = j_peaks
+        N1 = numpy.size(X1,0)
+        N2 = numpy.size(X2,0)
         if N1 == 0 or N2 == 0:
             raise Exception("[ERROR]:No peaks when computing the kernel.(try not clean the peaks)")
         constant = 1.0/(N1*N2)*0.25/(numpy.pi*sm*si)

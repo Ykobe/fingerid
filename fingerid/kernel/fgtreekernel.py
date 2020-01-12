@@ -4,7 +4,7 @@ Compute kernel for fragmentation tree
 =====================================
 
 """
-from mskernel import Kernel
+from fingerid.kernel.mskernel import Kernel
 import numpy
 
 class FragTreeKernel(Kernel):

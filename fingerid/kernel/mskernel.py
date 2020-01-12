@@ -26,7 +26,7 @@ class Kernel:
 
         """
 
-        print "Should not be called with this class"
+        print ("Should not be called with this class")
 
     def compute_test_kernel(self, test_spectra, train_spectra):
         """ compute the test kernel for spectra,

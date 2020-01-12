@@ -5,13 +5,12 @@ The parser for CASMI challenge 2012
 
 """
 import re
-import commands
+#import commands
 import os 
 import numpy
- 
-from spectrum import Spectrum
-from parser import Parser
-from util import sortbyfilenames
+from fingerid.preprocess.spectrum import Spectrum
+from fingerid.preprocess.parser import Parser
+from fingerid.preprocess.util import sortbyfilenames
 
 class ChallengeParser(Parser):
 
@@ -34,7 +33,8 @@ class ChallengeParser(Parser):
             dir_path = dir_path + "/"
 
         # invoke parse file for every file in the dir_path directory
-        files = commands.getoutput("ls %s" % dir_path).split()
+        #files = commands.getoutput("ls %s" % dir_path).split()
+        files = os.listdir(dir_path)
         for f in files:
             spec = self.parse_file(dir_path + f)
             spec_list.append(spec)
@@ -42,7 +42,7 @@ class ChallengeParser(Parser):
         return sortbyfilenames(spec_list, files)
 
     def _parse_massbank_file(self, f_path):
-        print "Parse file:",f_path
+        print("Parse file:",f_path)
         # read ms/ms file in
         f = open(f_path)
         data = f.read()

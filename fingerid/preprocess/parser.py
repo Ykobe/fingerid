@@ -22,7 +22,7 @@ class Parser:
         A instance of Spectrum
         """
 
-        print "Should not be called within this class"
+        print("Should not be called within this class")
 
     def parse_dir(self, dir_path="NULL"):
         """ Parse the dir in the parameter into the list of Spectrum instance
@@ -35,7 +35,7 @@ class Parser:
         -------
         A list of instance of Spectrum
         """
-        print "Should not be called within this class"
+        print("Should not be called within this class")
 
 #    def _merge_spectra(self, spec_list):
 #        """ 

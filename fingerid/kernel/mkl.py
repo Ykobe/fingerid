@@ -3,7 +3,7 @@
 Find the combined kernel matrix using UNIMKL, ALIGN, ALIGNF
 ===========================================================
 """
-import numpy        
+import numpy
 
 def mkl(km_list, labels, c_type):
     """Multiple kernel learning with UNIMKL, ALIGN, ALIGNF.
@@ -24,7 +24,7 @@ def mkl(km_list, labels, c_type):
     train_km, numpy 2d array, combined kernel
 
     """
-    print "Computing combined kernel for", c_type
+    print ("Computing combined kernel for", c_type)
     n_km = len(km_list)
 
     if c_type == 'UNIMKL':
@@ -32,7 +32,7 @@ def mkl(km_list, labels, c_type):
         for km in km_list:
             train_km = train_km + km
         train_km = normalize_km(train_km)
-        w = np.ones(n_km)/n_km
+        w = numpy.ones(n_km)/n_km
         #numpy.savetxt(out_f, train_km)
 
     elif c_type == 'ALIGN':

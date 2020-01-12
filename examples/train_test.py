@@ -8,7 +8,8 @@ shen_ISMB2014.py.
 
 import sys
 import numpy
-import warnings; warnings.filterwarnings('ignore')
+import warnings
+warnings.filterwarnings('ignore')
 # Comment the following line if fingerid has been installed,
 # otherwise, leave it there
 sys.path.append("../../fingerid")
@@ -29,7 +30,7 @@ from fingerid.preprocess.util import centerTestKernel
 if __name__ == "__main__":
     """Another pipeline when you have train/test instead of cross validation""" 
     # parse data
-    print "parse data\n"
+    print ("parse data\n")
     fgtreeparser = FragTreeParser()
     msparser = MSParser()
 
@@ -55,7 +56,7 @@ if __name__ == "__main__":
     # as in shen_ISMB2014.py. But here only compute sequentially
 
     for ty in types:
-        print "computing %s kernels" % ty
+        print ("computing %s kernels" % ty)
         if ty == "PPK":
             sm = 0.00001
             si = 100000
@@ -81,8 +82,8 @@ if __name__ == "__main__":
                                                      ty)
             train_km_list.append(train_km)
             test_km_list.append(centerTestKernel(test_km,train_km))
-    print 
-    print "combine kernels\n"
+    print ()
+    print ("combine kernels\n")
     # compute combined train and test kernel
     train_ckm, w = mkl(train_km_list, labels, 'ALIGN')
     test_ckm = numpy.zeros((n_test, n_train))
@@ -92,7 +93,7 @@ if __name__ == "__main__":
     test_ckm = test_ckm / numpy.sum(w)
 
     # train with 4 processe
-    print "train models and make prediction"
+    print ("train models and make prediction")
     # MODELS is the folder to store trained models.
     prob= True # Set prob=True if want probability output
     trainModels(train_ckm, labels, "MODELS", select_c=True, n_p=4, 

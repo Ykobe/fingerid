@@ -5,13 +5,12 @@ Parser of MS/MS in the format as example dataset
 """
 
 import re
-import commands
 import os
 import numpy
 
-from spectrum import Spectrum
-from parser import Parser
-from util import sortbyfilenames
+from fingerid.preprocess.spectrum import Spectrum
+from fingerid.preprocess.parser import Parser
+from fingerid.preprocess.util import sortbyfilenames
 
 class MSParser(Parser):
     """
@@ -35,11 +34,14 @@ class MSParser(Parser):
         if dir_path[-1] != "/":
             dir_path = dir_path + "/"
         # invoke parse file for every file in the dir_path directory           
-        files = commands.getoutput("ls %s" % dir_path).split()
-        for f in files:
+        #files = commands.getoutput("ls %s" % dir_path).split()
+        fileList = os.listdir(dir_path)
+        for f in fileList:
             spec = self.parse_file(dir_path + f)
             spec_list.append(spec)
-        return sortbyfilenames(spec_list, files)
+        #return sortbyfilenames(spec_list, files)
+
+        return sortbyfilenames(spec_list, fileList)
 
     def _parse_ms_file(self, f_path):
 #        print "Parse file:",f_path
